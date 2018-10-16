@@ -79,6 +79,7 @@ Note that resource names / scope needs to align with what you configured in the 
 public class WebController {
 
     @RequestMapping("/")
+    @PreAuthorize("permitAll")
     public String helloWorld(){
         return "Helloworld !!";
     }
@@ -102,13 +103,15 @@ public class WebController {
     }
 }
 
+
 ```
 
-You will also need to all the EnableResourceServer annotation to your application.
+You will also need to add the EnableResourceServer annotation as well as enable PreAuthorize annotations to your application.
 
 ```java
 @SpringBootApplication
 @EnableResourceServer
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class PcfSsoResourceExampleApplication {
 ```
 
