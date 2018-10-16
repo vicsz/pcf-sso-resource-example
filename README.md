@@ -118,7 +118,7 @@ public class PcfSsoResourceExampleApplication {
 
 You 
 ```properties
-security.oauth2.resource.jwt.key-uri=OAUTH_TOKEN_VERIFICATION_URL
+security.oauth2.resource.jwk.key-set-uri=OAUTH_TOKEN_VERIFICATION_URL
 ```
 
 ### 3. Deploy your Application in PCF
