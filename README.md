@@ -28,7 +28,7 @@ Select the Resources Tab and click on New Resource.
 
 Create some sample permissions, example: 
 
-<img src="img/.png" width="500">
+<img src="img/add-resource.png" width="500">
 
 Save the Resource. 
 
