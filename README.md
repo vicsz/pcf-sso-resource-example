@@ -62,3 +62,59 @@ curl -X POST OAUTH_TOKEN_URL -u "APP_ID:APP_SECRET" -d "grant_type=client_creden
 
 You should see a valid response with a bearer token and available scopes.
 
+## Creating the Spring Boot OAUTH 2 Resource Server 
+
+### 1. Using the Spring INITIALIZR website create a new template project with the Cloud OAuth2 and Web dependency.
+
+>> Note - Client Credentials GrantType was introduced in Spring Security 5.1 
+
+https://docs.spring.io/spring-security/site/docs/5.1.2.BUILD-SNAPSHOT/reference/htmlsingle/#new
+
+### 2. Add a Sample WebController class with different permission (scope) requirements.
+
+Note that resource names / scope needs to align with what you configured in the SSO tile. 
+
+```java
+@RestController
+public class WebController {
+
+    @RequestMapping("/")
+    public String helloWorld(){
+        return "Helloworld !!";
+    }
+
+    @RequestMapping("/read")
+    @PreAuthorize("#oauth2.hasScope('todo.read')")
+    public String readMethod(){
+        return "Made some read to todo list.";
+    }
+
+    @RequestMapping("/write")
+    @PreAuthorize("#oauth2.hasScope('todo.write')")
+    public String writeMethod(){
+        return "Made some write to todo list.";
+    }
+
+    @RequestMapping("/admin")
+    @PreAuthorize("#oauth2.hasScope('todo.admin')")
+    public String adminMethod(){
+        return "Made some admin call to todo list.";
+    }
+}
+
+```
+
+You will also need to all the EnableResourceServer annotation to your application.
+
+```java
+@SpringBootApplication
+@EnableResourceServer
+public class PcfSsoResourceExampleApplication {
+```
+
+### 3. Deploy, Bind to SSO Service, and Restage your Application in PCF
+
+
+### 4. Verify you can make secure SSO calls to your application using the earlier generated Bearer Token.
+
+
