@@ -50,6 +50,7 @@ Create the App.
 1. App ID
 2. App Secret
 3. OAuth Token URL
+4. OAuth Token Verification Keys URL
 
 ### 5. Verify you can create Bearer Tokens for your newly created Application. 
 
@@ -115,7 +116,12 @@ You will also need to add the EnableResourceServer annotation as well as enable 
 public class PcfSsoResourceExampleApplication {
 ```
 
-### 3. Deploy, Bind to SSO Service, and Restage your Application in PCF
+You 
+```properties
+security.oauth2.resource.jwt.key-uri=OAUTH_TOKEN_VERIFICATION_URL
+```
+
+### 3. Deploy your Application in PCF
 
 
 ### 4. Verify you can make secure SSO calls to your application using the earlier generated Bearer Token.
